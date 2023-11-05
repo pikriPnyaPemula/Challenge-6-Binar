@@ -15,7 +15,7 @@ model User {
   email     String  @unique
   password  String
   profile   UserProfile?
-  image    Image?
+  image    Image[]
 }
 
 model UserProfile {
@@ -33,5 +33,5 @@ model Image {
   title           String
   desc            String?
   user            User @relation(fields: [user_id], references: [id])
-  user_id         Int @unique
+  user_id         Int
 }

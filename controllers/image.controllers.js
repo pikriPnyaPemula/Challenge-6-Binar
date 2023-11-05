@@ -4,7 +4,7 @@ const imagekit = require('../libs/imagekit');
 const path = require('path');
 
 module.exports = {
-    upload: async (req, res, next) => {
+    uploadImage: async (req, res, next) => {
         try{
             let{id} = req.params;
             let {title, desc} = req.body;
@@ -41,5 +41,53 @@ module.exports = {
         }catch(err){
             next(err);
         }
+    },
+
+    getImageById: async (req, res, next)=>{
+        try{
+            let {id} = req.params;
+                let image = await prisma.image.findMany({where: {user_id: Number(id)}});
+
+                return res.status(200).json({
+                    status: true,
+                    message: 'OK',
+                    err: null,
+                    data: {image}
+                })
+        } catch(err){
+            next(err);
+        }
+    },
+
+    getImageDetail: async (req, res, next)=>{
+        try{
+            let{id} = req.params;
+            let image = await prisma.image.findUnique({where: {id: Number(id)}});
+
+            return res.status(200).json({
+                status: true,
+                message: 'OK',
+                err: null,
+                data: {image}
+            })
+        } catch(err){
+            next(err);
+        }
+    },
+
+    deleteImage: async (req, res, next)=>{
+        try{
+            let{id} = req.params;
+            let deleteimage = await prisma.image.delete({where: {id: Number(id)}});
+
+                res.status(200).json({
+                    status: true,
+                    message: 'OK',
+                    err: null,
+                    data: {deleteimage}
+                });
+        }catch(err){
+            next(err);
+        }    
     }
 };
