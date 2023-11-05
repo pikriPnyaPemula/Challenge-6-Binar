@@ -124,9 +124,6 @@ module.exports = {
                 message: 'OK',
                 err: null,
                 data: {
-                    file_url: url,
-                    name,
-                    birth_date,
                     updateOperation
                 }
             });

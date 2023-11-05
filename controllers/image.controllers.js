@@ -89,5 +89,45 @@ module.exports = {
         }catch(err){
             next(err);
         }    
+    },
+
+    updateImage: async (req, res, next)=>{
+        try{
+            let{id} = req.params;
+            let{title, desc} = req.body;
+
+            const imageExist = await prisma.image.findUnique({where : {id: Number(id)}});
+            if(!imageExist){
+                return res.status(400).json({
+                    status: false,
+                    message: 'Bad Request',
+                    err: 'Image ID is not exist',
+                    data: null
+                })
+            }
+
+            let strFile = req.file.buffer.toString('base64');
+            let {url} = await imagekit.upload({
+                fileName: Date.now() + path.extname(req.file.originalname),
+                file: strFile
+            });
+
+            let updateOperation = await prisma.image.upsert({
+                where: {id: Number(id)},
+                update: {title, desc, upload_picture: url},
+                create: {title, desc, upload_picture: url, user: {connect: {id: Number(id)}}}
+            });
+
+            res.status(200).json({
+                status: true,
+                message: 'OK',
+                err: null,
+                data: {
+                    updateOperation
+                }
+            });
+        }catch(err){
+            next(err);
+        }
     }
 };

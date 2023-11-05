@@ -3,8 +3,8 @@ POST http://localhost:3000/api/v1/auth/register
 Content-Type: application/json
 
 {
-    "email": "zaki@gmail.com",
-    "password": "zaki123"
+    "email": "gunawan@gmail.com",
+    "password": "gunawan123"
 }
 
 ### Login
@@ -12,10 +12,10 @@ POST http://localhost:3000/api/v1/auth/login
 Content-Type: application/json
 
 {
-    "email": "zaki@gmail.com",
-    "password": "zaki123"
+    "email": "gunawan@gmail.com",
+    "password": "gunawan123"
 }
 
 ### authenticate
 GET http://localhost:3000/api/v1/auth/authenticate
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjk5MTc2NDIyfQ.uv27qzfmiD6meVwlJcQ1ueiAEndxf2XLM0W8lmzWIUM
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjk5MTk1Mzc3fQ._uYKBhh8v1C5YkM-kzytb5VUGIEb_jA1vuZlHwzQWlw
